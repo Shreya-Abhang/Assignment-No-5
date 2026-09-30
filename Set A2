@@ -1,0 +1,32 @@
+<?php
+$n = $_GET['n'];
+if ($n == "") {
+    echo "Stranger, Please tell your name !!";
+} else if ($n == "Rohit" || $n == "Virat" || $n == "Dhoni") {
+    echo "Hello, master " . $n . "!!!";
+} else {
+    echo $n . ", I don't know you!!!";
+}
+?>
+
+<html>
+<body>
+    <script>
+        function display() {
+            var x = new XMLHttpRequest();
+            var n = document.getElementById("n").value;
+            x.open("GET", "seta2name.php?n=" + encodeURIComponent(n), true);
+            x.send();
+            x.onreadystatechange = function() {
+                if (x.readyState == 4 && x.status == 200) {
+                    document.getElementById("show").innerHTML = x.responseText;
+                }
+            };
+        }
+    </script>
+
+    Enter your name:
+    <input type="text" id="n" name="n" onkeyup="display()" /><br><br>
+    <h3 id="show"></h3>
+</body>
+</html>
