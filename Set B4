@@ -1,0 +1,38 @@
+<html>
+<head></head>
+<body>
+<script type="text/javascript">
+function display() {
+    var x = new XMLHttpRequest();
+    var n = document.getElementById("pid").value;
+    x.open("GET", "product.php?pid=" + n, true);
+    x.send();
+    x.onreadystatechange = function() {
+        if (x.readyState == 4 && x.status == 200) {
+            document.getElementById("show").innerHTML = x.responseText;
+        }
+    };
+}
+</script>
+
+Product ID:
+<input type="text" id="pid" />
+<button onclick="display()">Search</button>
+
+<div id="show"></div>
+</body>
+</html>
+
+<?php
+$pid = $_GET['pid'];
+$con = pg_connect("host=localhost dbname=College user=root");
+
+$qry = "select * from product where pid = '$pid'";
+$res = pg_query($con, $qry);
+
+if ($row = pg_fetch_row($res)) {
+    echo "Product ID: " . $row[0] . "<br>";
+    echo "Product Name: " . $row[1] . "<br>";
+    echo "Price: " . $row[2] . "<br>";
+}
+?>
