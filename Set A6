@@ -1,0 +1,15 @@
+<html>
+<body>
+    <h2>Fruit List</h2>
+    <ul id="fruits"></ul>
+
+    <script>
+        var fruits = ["Apple", "Mango", "Banana"];
+        var list = "";
+        for (var i = 0; i < fruits.length; i++) {
+            list += "<li>" + fruits[i] + "</li>";
+        }
+        document.getElementById("fruits").innerHTML = list;
+    </script>
+</body>
+</html>
