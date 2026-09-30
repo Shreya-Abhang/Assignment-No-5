@@ -1,0 +1,53 @@
+<html>
+<body>
+<script type="text/javascript">
+function display() {
+    var x = new XMLHttpRequest();
+    var n = document.getElementById("name").value;
+    x.open("GET", "Order.php?name=" + n, true);
+    x.send();
+    x.onreadystatechange = function() {
+        if (x.readyState == 4 && x.status == 200) {
+            document.getElementById("show").innerHTML = x.responseText;
+        }
+    };
+}
+</script>
+
+Customer Name:
+<select id="name" onchange="display()">
+    <option>Select</option>
+    <option>Rahul</option>
+    <option>Amit</option>
+    <option>Sneha</option>
+</select>
+
+<h3 id="show"></h3>
+</body>
+</html>
+
+<?php
+$name = $_GET['name'];
+$con = pg_connect("host=localhost dbname=College user=root");
+
+$qry = "select ono, date, shipping_address from Customer, orders where Customer.cno = orders.cno and cname = '$name'";
+$res = pg_query($con, $qry);
+
+if ($res) {
+    echo "<table border='1'>";
+    echo "<tr>
+            <th>Order no</th>
+            <th>Order date</th>
+            <th>Shipping Address</th>
+          </tr>";
+
+    while ($row = pg_fetch_row($res)) {
+        echo "<tr>";
+        echo "<td>" . $row[0] . "</td>";
+        echo "<td>" . $row[1] . "</td>";
+        echo "<td>" . $row[2] . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+}
+?>
