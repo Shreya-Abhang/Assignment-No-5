@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Product Details</h2>
+    <pre id="show"></pre>
+
+    <script>
+        var product = {
+            name: "Laptop",
+            price: "55000",
+            brand: "Dell"
+        };
+
+        var jsonString = JSON.stringify(product, null, 2);
+        document.getElementById("show").textContent = jsonString;
+    </script>
+</body>
+</html>
