@@ -1,0 +1,29 @@
+<html>
+<body>
+<script type="text/javascript">
+function display() {
+    var x = new XMLHttpRequest();
+    x.open("GET", "category.php", true);
+    x.send();
+    x.onreadystatechange = function() {
+        if (x.readyState == 4 && x.status == 200) {
+            document.getElementById("cat").innerHTML = x.responseText;
+        }
+    };
+}
+</script>
+
+<button onclick="display()">Load Categories</button>
+<select id="cat"></select>
+</body>
+</html>
+
+<?php
+$con = pg_connect("host=localhost dbname=College user=root");
+$qry = "select * from employee_category";
+$res = pg_query($con, $qry);
+
+while ($row = pg_fetch_row($res)) {
+    echo "<option value='" . $row[0] . "'>" . $row[1] . "</option>";
+}
+?>
