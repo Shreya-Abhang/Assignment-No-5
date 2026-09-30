@@ -1,0 +1,16 @@
+<html>
+<body>
+    <h2>Book Details</h2>
+    <p id="show"></p>
+
+    <script>
+        var book = {
+            "title": "The Alchemist",
+            "author": "Paulo Coelho",
+            "price": 399
+        };
+
+        document.getElementById("show").innerHTML = "Book Title: " + book.title;
+    </script>
+</body>
+</html>
