@@ -1,0 +1,39 @@
+<?php
+$n = $_GET['n'];
+$a = array(
+    "Java Programming",
+    "Python Programming",
+    "Web Technology",
+    "DAA"
+);
+
+echo "Book List:<br>";
+foreach ($a as $v) {
+    $s = substr($v, 0, strlen($n));
+    if (strcasecmp($s, $n) == 0) {
+        echo "$v <br>";
+    }
+}
+?>
+
+<html>
+<body>
+<script type="text/javascript">
+function display() {
+    var x = new XMLHttpRequest();
+    var n = document.getElementById("n").value;
+    x.open("GET", "book.php?n=" + n, true);
+    x.send();
+    x.onreadystatechange = function() {
+        if (x.readyState == 4 && x.status == 200) {
+            document.getElementById("show").innerHTML = x.responseText;
+        }
+    };
+}
+</script>
+
+Search Book:
+<input type="text" id="n" onkeyup="display()" />
+<div id="show"></div>
+</body>
+</html>
