@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Show Teacher Details</title>
+</head>
+<body>
+    <h2>Teacher Details</h2>
+    <select id="teacher" onchange="showTeacher()">
+        <option value="">Select Teacher</option>
+        <option value="Rahul">Rahul</option>
+        <option value="Priya">Priya</option>
+        <option value="Amit">Amit</option>
+    </select>
+    <br><br>
+    <div id="result"></div>
+
+    <script>
+        function showTeacher() {
+            var name = document.getElementById("teacher").value;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "SetB1.php?name=" + encodeURIComponent(name), true);
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>
+
+<?php
+$conn = pg_connect("host=localhost port=5432 dbname=postgres user=postgres password=root");
+
+$name = $_GET['name'];
+$result = pg_query($conn, "SELECT * FROM teacher12 WHERE name = '$name'");
+
+echo "<table border=1>";
+echo "<tr>";
+echo "<th>TNo</th>";
+echo "<th>TName</th>";
+echo "<th>Qualification</th>";
+echo "<th>Salary</th>";
+echo "</tr>";
+
+while ($row = pg_fetch_assoc($result)) {
+    echo "<tr>";
+    echo "<td>" . $row["tno"] . "</td>";
+    echo "<td>" . $row["name"] . "</td>";
+    echo "<td>" . $row["qualification"] . "</td>";
+    echo "<td>" . $row["salary"] . "</td>";
+    echo "</tr>";
+}
+echo "</table>";
+
+pg_close($conn);
+?>
