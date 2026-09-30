@@ -1,0 +1,25 @@
+<?php
+echo "Hello!!! My name is Shreya";
+?>
+
+<html>
+<head></head>
+<body>
+    <script type="text/javascript">
+        function display() {
+            var x = new XMLHttpRequest();
+            x.open("GET", "seta3paragraph.php", true);
+            x.send();
+            x.onreadystatechange = function() {
+                if (x.readyState == 4 && x.status == 200) {
+                    document.getElementById("show").innerHTML = x.responseText;
+                }
+            };
+        }
+    </script>
+
+    <h2>Ajax</h2>
+    <button onclick="display()">Load paragraph</button>
+    <p id="show"></p>
+</body>
+</html>
