@@ -1,0 +1,34 @@
+<?php
+$n = strtolower($_GET['n']);
+$a = array("Pune", "Mumbai", "Nagpur", "Sangamner");
+
+echo "List of cities:<br>";
+foreach ($a as $v) {
+    $s = strtolower(substr($v, 0, strlen($n)));
+    if ($s == $n) {
+        echo $v . "<br>";
+    }
+}
+?>
+
+<html>
+<body>
+    <script type="text/javascript">
+        function display() {
+            var x = new XMLHttpRequest();
+            var n = document.getElementById("n").value;
+            x.open("GET", "seta4city.php?n=" + encodeURIComponent(n), true);
+            x.send();
+            x.onreadystatechange = function() {
+                if (x.readyState == 4 && x.status == 200) {
+                    document.getElementById("show").innerHTML = x.responseText;
+                }
+            };
+        }
+    </script>
+
+    Search city:
+    <input type="text" id="n" name="n" onkeyup="display()" />
+    <div id="show"></div>
+</body>
+</html>
