@@ -1,0 +1,15 @@
+<html>
+<body>
+    <script>
+        var student = {
+            "name": "Rahul",
+            "rollno": "101",
+            "marks": "85"
+        };
+
+        console.log("Student name: " + student.name);
+        console.log("Student Roll number: " + student.rollno);
+        console.log("Student Marks: " + student.marks);
+    </script>
+</body>
+</html>
